@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        To_Do LIST
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/global.css">
+</head>
+
+<body class="body">
+    <header class="header">
+        To_Do LIST
+    </header>
+    <main class="container">
+        <div>
+            <div>
+                <span class="input-box">
+                    <div class="wide">
+                        <input class="input" required placeholder="Введите задачу" type="text" name="newTask"
+                            id="newTask">
+                    </div>
+                    <button type="submit" class="add-button" onclick="addTask(newTask.value)">
+                        Добавить задачу
+                    </button>
+                    <!-- <button type="submit" class="add-button" onclick="updateStore()">
+                        обновить
+                    </button> -->
+                </span>
+                <div>
+                    <ul id="task_list" class="task_list">
+                        <!-- <li id="org_li1" /> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="">
+        Подвал
+    </footer>
+</body>
+<script src="/scripts/scripts.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        reloadStore()
+    });
+</script>
+<!-- <script src="/scripts/updateWindow.js"></script> -->
+<!-- <script>
+    // window.onload = () => {
+    //     updateTask()
+    // };
+    document.addEventListener('DOMContentLoaded', () => updateTask());
+    window.onload = () => updateTask();
+    window.addEventListener('load', () => {
+        updateTask();
+    });
+</script> -->
+
+</html>
