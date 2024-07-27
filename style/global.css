@@ -42,9 +42,13 @@
     border-bottom: solid 1px #d1d3d4;
 }
 
-.text {
-    /* width: 100%; */
+.text,
+.complite {
     flex-grow: 1;
+}
+
+.complite {
+    text-decoration: line-through;
 }
 
 .task_list {

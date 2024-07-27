@@ -31,6 +31,9 @@
                     <button type="submit" class="add-button" onclick="addTask(newTask.value)">
                         Добавить задачу
                     </button>
+                    <!-- <button type="submit" class="add-button" onclick="updateStore()">
+                        обновить
+                    </button> -->
                 </span>
                 <div>
                     <ul id="task_list" class="task_list">
@@ -45,5 +48,21 @@
     </footer>
 </body>
 <script src="/scripts/scripts.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        reloadStore()
+    });
+</script>
+<!-- <script src="/scripts/updateWindow.js"></script> -->
+<!-- <script>
+    // window.onload = () => {
+    //     updateTask()
+    // };
+    document.addEventListener('DOMContentLoaded', () => updateTask());
+    window.onload = () => updateTask();
+    window.addEventListener('load', () => {
+        updateTask();
+    });
+</script> -->
 
 </html>
