@@ -1,7 +1,9 @@
 let taskList = []
 let my_li = (newLi = null);
 
-
+const insertAfter = (referenceNode, newNode) => {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
 
 const updateStore = (text) => {
     if (localStorage.getItem('taskListStore'))
@@ -18,9 +20,9 @@ const reloadStore = () => {
     updateTask()
 }
 
-const removeStore = (text, inputId, id) => {
+const removeStore = (inputId, id) => {
     let value = document.getElementById(inputId);
-    console.log(value.value)
+    console.log(value)
     let message = value.value
     if (localStorage.getItem('taskListStore'))
         taskList = JSON.parse(localStorage.getItem('taskListStore'));
@@ -41,38 +43,27 @@ const addTask = (value) => {
     updateTask()
 }
 
-const insertAfter = (referenceNode, newNode) => {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+let createButton = (type, id, textContent, newLi, foo) => {
+    let button = document.createElement('button');
+    button.type = type;
+    button.classList.add('delete_btn');
+    button.id = id;
+    button.textContent = textContent;
+    button.onclick = function () { foo(id) }
+    newLi.append(button);
 }
 
 let createButtonRemove = (id, newLi) => {
-    let buttonRemove = document.createElement('button');
-    buttonRemove.type = 'buttonRemove';
-    buttonRemove.classList.add('delete_btn');
-    buttonRemove.id = id;
-    buttonRemove.textContent = 'Изменить';
-    buttonRemove.onclick = function () { removeTask(id) }
-    newLi.append(buttonRemove);
+    createButton('buttonRemove', id, 'Изменить', newLi, removeTask)
 }
 
 const createButtonDelete = (id, newLi) => {
-    let buttonDelete = document.createElement('button');
-    buttonDelete.type = 'buttonDelete';
-    buttonDelete.classList.add('delete_btn');
-    buttonDelete.id = id;
-    buttonDelete.textContent = 'Удалить';
-    buttonDelete.onclick = function () { deleteTask(id) }
-    newLi.append(buttonDelete);
+    createButton('buttonDelete', id, 'Удалить', newLi, deleteTask)
 }
 const createButtonComplite = (id, newLi) => {
-    let buttonComplite = document.createElement('button');
-    buttonComplite.type = 'buttonComplite';
-    buttonComplite.classList.add('delete_btn');
-    buttonComplite.id = id;
-    buttonComplite.textContent = 'Завершить';
-    buttonComplite.onclick = function () { compliteTask(id) }
-    newLi.append(buttonComplite);
+    createButton('buttonComplite', id, 'Завершить', newLi, compliteTask)
 }
+
 const createButtonSave = (id, newLi, inputId) => {
     let buttonSave = document.createElement('button');
     buttonSave.type = 'buttonSave';
@@ -80,26 +71,13 @@ const createButtonSave = (id, newLi, inputId) => {
     buttonSave.id = id;
     buttonSave.textContent = 'Сохранить';
     buttonSave.onclick = function () {
-        removeStore(inputId.value, inputId, id)
+        removeStore(inputId, id)
         saveTask(id)
-        // updateTask()
     }
     newLi.append(buttonSave);
 }
 
-// let createButton = (type, id, newLi, onclick) => {
-//     let button = document.createElement('button');
-//     type.type = 'buttonRemove';
-//     type.classList.add('delete_btn');
-//     type.id = id;
-//     type.textContent = 'Изменить';
-//     type.onclick = function () { onclick(i) }
-//     newLi.append(button);
-// }
-
-
 const refreshTaskList = () => {
-
     for (let i = 0; i < taskList.length; i++) {
         let ul = document.querySelector('#task_list');
         let newLi = document.createElement(`li`)
@@ -124,7 +102,6 @@ const refreshTaskList = () => {
             newLi.append(newInput);
         }
 
-        // createButton(buttonDelete, i, newLi, deleteTask)
         if (taskList[i][2]) {
             createButtonDelete(i, newLi)
         }
