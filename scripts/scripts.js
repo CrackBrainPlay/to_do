@@ -1,19 +1,34 @@
 let taskList = [
-    'Задача 1',
-    'Задача 2',
-    'Задача 3',
+    // 'Задача 1',
+    // 'Задача 2',
+    // 'Задача 3',
 ]
 
 let my_li = (newLi = null);
 
+// localStorage.setItem('taskListStore', JSON.stringify(['Задача 1', 'Задача 2', 'Задача 3']));
+
+// let taskList = JSON.parse(localStorage.getItem('taskListStore'));
+
+const updateStore = (text) => {
+    if (localStorage.getItem('taskListStore'))
+        taskList = JSON.parse(localStorage.getItem('taskListStore'));
+    // let addRow = { index: text }
+    let addRow = text
+    taskList.push(addRow);
+    localStorage.setItem('taskListStore', JSON.stringify(taskList));
+}
+
 const updateTask = () => {
     let ul = document.getElementById('task_list');
     ul.innerHTML = '';
+    // localStorage.setItem('taskListStore', JSON.stringify(taskList));
     refreshTaskList()
 }
 
 const addTask = (value) => {
-    taskList.push(value)
+    // taskList.push(value)
+    updateStore(value)
     updateTask()
 }
 
@@ -27,7 +42,7 @@ let createButtonRemove = (id, newLi) => {
     buttonRemove.classList.add('delete_btn');
     buttonRemove.id = id;
     buttonRemove.textContent = 'Изменить';
-    button.onclick = function () { removeTask(i) }
+    // button.onclick = function () { removeTask(i) }
     newLi.append(buttonRemove);
 }
 
@@ -83,8 +98,10 @@ const refreshTaskList = () => {
 
 const deleteTask = (id) => {
     taskList.splice(id, 1);
+    localStorage.setItem('taskListStore', JSON.stringify(taskList));
     updateTask()
 }
+
 
 // const compliteTask = (id) => {
 
